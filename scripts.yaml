@@ -1,0 +1,4 @@
+generate_vocab:
+    python generate_vocab.py ~/atlas---deep-learning-assert-statements/Datasets/Raw_Dataset/Training/testMethods.txt
+    python generate_vocab.py ~/atlas---deep-learning-assert-statements/Datasets/Raw_Dataset/Training/assertLines.txt
+train_test: ./train_test.sh ../Datasets/Raw_Dataset 1000 ../models/raw_model ../Results/Raw_Results assertConfig
