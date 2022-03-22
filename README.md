@@ -16,7 +16,7 @@ Once the data and the vocabulary has been generated the script train_test.sh can
 For your convienence, both the raw and abstracted model that were generated using this script is included in the Models folder.
 ```
 mkdir -p ../models/raw_model/
-./train_test.sh ../dataset/raw/training/ 300000 ../models/raw_model/ assertConfig
+./train_test.sh ../dataset/raw/training/ 300000 ../models/raw_model/ ../results/raw_model/ assertConfig
 ```
 
 ## Inference
