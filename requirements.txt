@@ -1,4 +1,1 @@
-numpy
-matplotlib
-pyyaml
-pyrouge
+git+https://github.com/google/seq2seq.git

@@ -58,22 +58,13 @@ function prepare_conda_env() {
         conda create --name $env_name python=3.6 pip -y
         conda activate $env_name
 
-        # PyTorch
+        # Tensorflow
         local mllib="";
-        local cuda_toolkit="";
         case $cuda_version in
         cpu)
-                mllib="tensorflow==${TF_VERSION}"
-                cuda_toolkit=cpuonly;;
-        cu101)
-                mllib="tensorflow-gpu==${TF_VERSION}"
-                cuda_toolkit="cudatoolkit=10.1";;
-        cu102)
-                mllib="tensorflow-gpu==${TF_VERSION}"
-                cuda_toolkit="cudatoolkit=10.2";;
-        cu111)
-                mllib="tensorflow-gpu==${TF_VERSION}"
-                cuda_toolkit="cudatoolkit=11.1 -c nvidia";;
+                mllib="tensorflow==${TF_VERSION}";;
+        cu*)
+                mllib="tensorflow-gpu==${TF_VERSION}";;
         *)
                 echo "ERROR: Only cuda 10.1, 10.2, 11.1 are supported, but you have $cuda_version" 1>&2
                 echo "HINT: Use 'source switch-cuda.sh [version]' if you have multiple versions installed" 1>&2
