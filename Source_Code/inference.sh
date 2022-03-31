@@ -31,7 +31,7 @@ for beam_width in ${beam_widths[*]}; do
     
     SECONDS=0;
     
-python3 -m bin.infer \
+python -m bin.infer \
   --tasks "
     - class: DecodeText
       params:
@@ -71,8 +71,8 @@ python3 -m bin.infer \
 total=`wc -l ${TEST_TARGETS}| awk '{print $1}'`
 echo "Test Set: $total"
 cp $VOCAB_TARGET ${PRED_DIR}/
-python3 $PRED_SCRIPTS/beamPredictions.py ${PRED_DIR} ${RESULTS_PRED_DIR}
-output=$(python3 $PRED_SCRIPTS/beam_prediction_classifier.py ${TEST_SOURCES} ${TEST_TARGETS} "${PRED_DIR}/predictions.beam.mul.txt" 2>&1)
+python $PRED_SCRIPTS/beamPredictions.py ${PRED_DIR} ${RESULTS_PRED_DIR}
+output=$(python $PRED_SCRIPTS/beam_prediction_classifier.py ${TEST_SOURCES} ${TEST_TARGETS} "${PRED_DIR}/predictions.beam.mul.txt" 2>&1)
 perf=`awk '{print $1}' <<< "$output"`
 changed=`awk '{print $2}' <<< "$output"`
 perf_perc="$(echo "scale=2; $perf * 100 / $total" | bc)"

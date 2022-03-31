@@ -38,7 +38,7 @@ export MAX_CHECKPOINT=${MAX_CHECKPOINT}
 export MODEL_DIR=${MODEL_DIR}
 mkdir -p $MODEL_DIR
 
-python3 -m bin.train \
+python -m bin.train \
   --config_paths="
       ./configs/$CONFIG.yml,
       ./example_configs/train_seq2seq_optimized.yml,
@@ -73,7 +73,7 @@ echo "------------------- TESTING GREEDY ------------------------"
 export PRED_DIR=${MODEL_DIR}/pred
 mkdir -p ${PRED_DIR}
 
-python3 -m bin.infer \
+python -m bin.infer \
   --tasks "
     - class: DecodeText
       params:
@@ -98,7 +98,7 @@ total=`wc -l ${TEST_TARGETS}| awk '{print $1}'`
 echo "Test Set: $total"
 
 echo "Predictions"
-output=$(python3 $PRED_SCRIPTS/prediction_classifier.py ${TEST_TARGETS} "${PRED_DIR}/predictions.txt" 2>&1)
+output=$(python $PRED_SCRIPTS/prediction_classifier.py ${TEST_TARGETS} "${PRED_DIR}/predictions.txt" 2>&1)
 perf=`awk '{print $1}' <<< "$output"`
 imperf=`awk '{print $2}' <<< "$output"`
 perf_perc="$(echo "scale=2; $perf * 100 / $total" | bc)"
